@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public int playerHp = 10;
     public Transform target;
     public float moveSpeed = 5f;
     public float rotateSpeed = 10f;
@@ -30,9 +31,6 @@ public class Player : MonoBehaviour
         if(target != null)
             transform.LookAt(target.position);
         Move();
-
-
-
     }
     
     public void InputCmd()

@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     public void PlayAnimation(AttackStyle cmd)
     {
         curAttack = cmd;
-
+        SoundManager.instance.PlayRandomAttackVfx();
         switch(curAttack)
         {
             case AttackStyle.JAP:

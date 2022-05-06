@@ -5,11 +5,9 @@ using Cinemachine;
 
 public class BattleManager : MonoBehaviour
 {
-    public int round;
-
-    CinemachineVirtualCamera p1Cam;
-    CinemachineVirtualCamera p2Cam;
-    CinemachineVirtualCamera neutralCam;
+    public CinemachineVirtualCamera p1Cam;
+    public CinemachineVirtualCamera p2Cam;
+    public CinemachineVirtualCamera neutralCam;
 
     public static BattleManager instance{get;private set;}
     private void Awake()
@@ -17,15 +15,9 @@ public class BattleManager : MonoBehaviour
         instance = this;
     }
     
-    IEnumerator StartBattle(List<int> player1List, List<int> player2List)
+    public IEnumerator StartBattle(List<AttackStyle> player1List, List<AttackStyle> player2List)
     {
-        //for문으로
-        {
-            //player1List[i] player2List[i]
-            //yield return 
-        }
-        yield break;
-        
+        yield return null;
     }
     public void EndBattle()
     {

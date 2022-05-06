@@ -72,7 +72,8 @@ public class GameManager : MonoBehaviour
     {
         print("인풋 시작");
         float curTime = 0f;
-        
+
+        UIManager.instance.timer.gameObject.SetActive(true);    
         CommandManager.instance.ResetCommand();
         while(true)
         {

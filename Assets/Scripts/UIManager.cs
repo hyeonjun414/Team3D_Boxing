@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
     public Text p2CmdText;
     public CommandUI p1CmdUI;
     public CommandUI p2CmdUI;
-    public GameObject cmdTimeBar;
+    public Timer timer;
 
     [Header("Round")]
     public GameObject roundUI;

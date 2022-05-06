@@ -8,6 +8,9 @@ public class Player : MonoBehaviour
     public Animator anim;
 
     public GameObject[] customs;
+    public GameResult gameResult;
+
+    public AttackStyle curAttack;
 
     private void Start()
     {
@@ -17,44 +20,10 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        //InputCmd();
-    }
-    
-    public void InputCmd()
-    {
-        if(Input.GetKeyDown(KeyCode.Y))
-        {
-            anim.SetTrigger("Jap_L");
-            anim.SetBool("IsRight", false);
-        }
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            anim.SetTrigger("Hook_L");
-            anim.SetBool("IsRight", false);
 
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            anim.SetTrigger("Upper_L");
-            anim.SetBool("IsRight", false);
-
-        }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            anim.SetTrigger("Jap_R");
-            anim.SetBool("IsRight", true);
-        }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            anim.SetTrigger("Hook_R");
-            anim.SetBool("IsRight", true);
-        }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            anim.SetTrigger("Upper_R");
-            anim.SetBool("IsRight", true);
-        }
     }
+
+
 
     private void SetCharacter()
     {
@@ -64,7 +33,9 @@ public class Player : MonoBehaviour
 
     public void PlayAnimation(AttackStyle cmd)
     {
-        switch(cmd)
+        curAttack = cmd;
+
+        switch(curAttack)
         {
             case AttackStyle.JAP:
                 anim.SetTrigger("Jap");
@@ -76,6 +47,27 @@ public class Player : MonoBehaviour
                 anim.SetTrigger("Upper");
                 break;
         }
+        if(gameResult != GameResult.WIN)
+        {
+            if(curAttack == AttackStyle.UPPER)
+                Invoke("DelayAnim",0.3f);
+            else
+                Invoke("DelayAnim",0.5f);
+        }
+        //if(gameResult == GameResult.LOSE )
+        //{
+        //}
+        //이기거나 비길떄 공격
+
+        //else 트리거 , 인티저
+
+        anim.SetInteger("Result",(int)gameResult);
+    }
+
+    public void DelayAnim()
+    {
+        anim.SetTrigger("Hit");
+        
     }
 
 }

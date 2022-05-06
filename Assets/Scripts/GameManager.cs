@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour
     public void BattleResult()
     {
         //UI랑 연동
+
+
+
     }
 
 
@@ -37,9 +40,20 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
+            if(p1.playerHp  <= 0 || p2.playerHp <= 0 )
+            {
+                //TODO :: 플레이어 죽었을 때 
+                break;
+            }
+
             yield return StartCoroutine("InputRoutine");
             yield return new WaitForSeconds(2f);
+            yield return StartCoroutine(BattleManager.instance.StartBattle());
+            //애니메이션 출력
+
         }
+        // TODO :: 플레이어 죽었을 때
+        yield return null;
     }
     IEnumerator RoundStartRoutine()
     {
@@ -50,6 +64,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(startTime);
         ui.gameObject.SetActive(false);
     }
+
+
     IEnumerator InputRoutine()
     {
         print("인풋 시작");

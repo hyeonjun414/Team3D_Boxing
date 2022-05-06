@@ -8,6 +8,14 @@ public enum AttackStyle
     HOOK,
     JAP,
 }
+
+public enum GameResult
+{
+    WIN,
+    DRAW,
+    LOSE
+}
+
 public class CommandManager : MonoBehaviour
 {
     public static CommandManager instance {get;private set;}

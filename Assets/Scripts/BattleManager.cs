@@ -17,6 +17,7 @@ public class BattleManager : MonoBehaviour
     
     public IEnumerator StartBattle(List<AttackStyle> player1List, List<AttackStyle> player2List)
     {
+        
         yield return null;
     }
     public void EndBattle()

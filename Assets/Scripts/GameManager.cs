@@ -38,7 +38,8 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             yield return StartCoroutine("InputRoutine");
-            yield return new WaitForSeconds(2f);
+            //yield return new WaitForSeconds(2f);
+            //yield return StartCoroutine(BattleManager.instance.StartBattle(list1, list2))
         }
     }
     IEnumerator RoundStartRoutine()
@@ -47,7 +48,9 @@ public class GameManager : MonoBehaviour
         ui.GetComponentInChildren<Text>().text = $"ROUND {curRound}";
         UIManager.instance.roundText.text = $"ROUND {curRound}";
         ui.gameObject.SetActive(true);
+
         yield return new WaitForSeconds(startTime);
+
         ui.gameObject.SetActive(false);
     }
     IEnumerator InputRoutine()

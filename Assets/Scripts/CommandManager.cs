@@ -32,8 +32,6 @@ public class CommandManager : MonoBehaviour
     }
     private void Start()
     {
-        p1Attack = new List<AttackStyle>();
-        p2Attack = new List<AttackStyle>();
         p1CmdUI = UIManager.instance.p1CmdUI;
         p2CmdUI = UIManager.instance.p2CmdUI;
     }
@@ -55,6 +53,7 @@ public class CommandManager : MonoBehaviour
                 p1Attack.Add(AttackStyle.JAP);
                 p1CmdUI.UpdateUI();
                 p1CurCount++;
+                SoundManager.instance.PlayInputSound();
             }
             else if (Input.GetKeyDown(KeyCode.W))
             {
@@ -62,6 +61,7 @@ public class CommandManager : MonoBehaviour
                 p1Attack.Add(AttackStyle.HOOK);
                 p1CmdUI.UpdateUI();
                 p1CurCount++;
+                SoundManager.instance.PlayInputSound();
             }
             else if (Input.GetKeyDown(KeyCode.E))
             {
@@ -69,6 +69,7 @@ public class CommandManager : MonoBehaviour
                 p1Attack.Add(AttackStyle.UPPER);
                 p1CmdUI.UpdateUI();
                 p1CurCount++;
+                SoundManager.instance.PlayInputSound();
             }
         }
         else
@@ -88,6 +89,7 @@ public class CommandManager : MonoBehaviour
                 p2Attack.Add(AttackStyle.JAP);
                 p2CmdUI.UpdateUI();
                 p2CurCount++;
+                SoundManager.instance.PlayInputSound();
             }
             else if (Input.GetKeyDown(KeyCode.O))
             {
@@ -95,6 +97,7 @@ public class CommandManager : MonoBehaviour
                 p2Attack.Add(AttackStyle.HOOK);
                 p2CmdUI.UpdateUI();
                 p2CurCount++;
+                SoundManager.instance.PlayInputSound();
             }
             else if (Input.GetKeyDown(KeyCode.P))
             {
@@ -102,6 +105,7 @@ public class CommandManager : MonoBehaviour
                 p2Attack.Add(AttackStyle.UPPER);
                 p2CmdUI.UpdateUI();
                 p2CurCount++;
+                SoundManager.instance.PlayInputSound();
             }
         }
         else

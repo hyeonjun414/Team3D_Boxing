@@ -17,44 +17,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        //InputCmd();
     }
     
-    public void InputCmd()
-    {
-        if(Input.GetKeyDown(KeyCode.Y))
-        {
-            anim.SetTrigger("Jap_L");
-            anim.SetBool("IsRight", false);
-        }
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            anim.SetTrigger("Hook_L");
-            anim.SetBool("IsRight", false);
-
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            anim.SetTrigger("Upper_L");
-            anim.SetBool("IsRight", false);
-
-        }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            anim.SetTrigger("Jap_R");
-            anim.SetBool("IsRight", true);
-        }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            anim.SetTrigger("Hook_R");
-            anim.SetBool("IsRight", true);
-        }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            anim.SetTrigger("Upper_R");
-            anim.SetBool("IsRight", true);
-        }
-    }
 
     private void SetCharacter()
     {

@@ -8,6 +8,9 @@ public class Player : MonoBehaviour
     public Animator anim;
 
     public GameObject[] customs;
+    public GameResult gameResult;
+
+    public AttackStyle curAttack;
 
     private void Start()
     {
@@ -20,6 +23,8 @@ public class Player : MonoBehaviour
     }
     
 
+
+
     private void SetCharacter()
     {
         int rand = Random.Range(0, customs.Length);
@@ -28,7 +33,9 @@ public class Player : MonoBehaviour
 
     public void PlayAnimation(AttackStyle cmd)
     {
-        switch(cmd)
+        curAttack = cmd;
+
+        switch(curAttack)
         {
             case AttackStyle.JAP:
                 anim.SetTrigger("Jap");
@@ -40,6 +47,27 @@ public class Player : MonoBehaviour
                 anim.SetTrigger("Upper");
                 break;
         }
+        if(gameResult != GameResult.WIN)
+        {
+            if(curAttack == AttackStyle.UPPER)
+                Invoke("DelayAnim",0.3f);
+            else
+                Invoke("DelayAnim",0.5f);
+        }
+        //if(gameResult == GameResult.LOSE )
+        //{
+        //}
+        //이기거나 비길떄 공격
+
+        //else 트리거 , 인티저
+
+        anim.SetInteger("Result",(int)gameResult);
+    }
+
+    public void DelayAnim()
+    {
+        anim.SetTrigger("Hit");
+        
     }
 
 }

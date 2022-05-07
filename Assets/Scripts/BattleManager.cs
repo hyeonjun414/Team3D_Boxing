@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
-
+using UnityEngine.UI;
 //쨉 > 어퍼    어퍼 > 훅   , 훅 >쨉 
 public class BattleManager : MonoBehaviour
 {
@@ -79,6 +79,46 @@ public class BattleManager : MonoBehaviour
                     p1.gameResult  = GameResult.WIN;
                     p2.gameResult = GameResult.LOSE;
                     CameraManager.instance.ActiveCam(CamType.P1Cam);
+                }
+            }
+          
+
+            // 쳐 맞음
+            if(p1.gameResult != GameResult.WIN)
+            {
+                p1.playerHp--;
+                UIManager.instance.p1HpBar.value = p1.playerHp;
+            }
+            if(p2.gameResult != GameResult.WIN)
+            {
+                p2.playerHp--;
+                UIManager.instance.p2HpBar.value = p2.playerHp;
+            }
+            // UI 변경 HP 변경사항
+            UIManager.instance.p1HpText.text = p1.playerHp.ToString();
+            UIManager.instance.p2HpText.text = p2.playerHp.ToString();
+
+            if(p1.playerHp == 0 && p2.playerHp == 0)
+            {
+                //비겼을때
+                break;
+            }
+            else
+            {
+
+                if(p1.playerHp == 0)
+                {
+                    //p2가 이겼을때
+                    p2.PlayAnimation(CommandManager.instance.p2Attack[i]);
+                    p2.PlayAnimWin();
+                    break;
+                }
+                if (p2.playerHp == 0)
+                {
+                    //p1이 이겼을때
+                    p1.PlayAnimation(CommandManager.instance.p1Attack[i]);
+                    p1.PlayAnimWin();
+                    break;
                 }
             }
             p1.PlayAnimation(CommandManager.instance.p1Attack[i]);

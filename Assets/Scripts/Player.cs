@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int playerHp = 10;
+    public static int playerMaxHp = 100;
+    private int _playerHp = playerMaxHp;
     public Animator anim;
 
     public GameObject[] customs;
@@ -12,16 +13,31 @@ public class Player : MonoBehaviour
 
     public AttackStyle curAttack;
 
+    private bool isDead = false;
+
+    public int playerHp
+    {
+        get
+        {
+            return _playerHp;
+        }
+        set
+        {
+            _playerHp = value;
+            if(_playerHp == 0 )
+            {
+                anim.SetTrigger("Die");
+                isDead = true;
+            }
+        }
+    }
+
+
     private void Start()
     {
         anim = GetComponentInChildren<Animator>();
         //SetCharacter();
     }
-
-    private void Update()
-    {
-    }
-    
 
 
 
@@ -31,43 +47,90 @@ public class Player : MonoBehaviour
         customs[rand].SetActive(true);
     }
 
+
     public void PlayAnimation(AttackStyle cmd)
     {
+
+        if(isDead == true)
+        {
+            return;
+        }
+        float loseDeley;
         curAttack = cmd;
         SoundManager.instance.PlayRandomAttackVfx();
+        if(gameResult != GameResult.WIN)
+        {    
+            loseDeley = 0.2f;
+        }
+        else
+        {
+            loseDeley = 0f;
+        }
         switch(curAttack)
         {
             case AttackStyle.JAP:
-                anim.SetTrigger("Jap");
+                Invoke("PlayAnimJap",loseDeley);
                 break;
             case AttackStyle.HOOK:
-                anim.SetTrigger("Hook");
+                Invoke("PlayAnimHook",loseDeley);
                 break;
             case AttackStyle.UPPER:
-                anim.SetTrigger("Upper");
+                Invoke("PlayAnimUpper",loseDeley);
                 break;
         }
         if(gameResult != GameResult.WIN)
         {
             if(curAttack == AttackStyle.UPPER)
-                Invoke("DelayAnim",0.3f);
+                Invoke("DelayAnim",0.7f);
             else
                 Invoke("DelayAnim",0.5f);
         }
-        //if(gameResult == GameResult.LOSE )
-        //{
-        //}
-        //이기거나 비길떄 공격
-
-        //else 트리거 , 인티저
 
         anim.SetInteger("Result",(int)gameResult);
+
+    }
+
+
+    public void PlayAnimWin()
+    {
+        Invoke("SetWinTrigger",1f);
+    }
+    public void PlayAnimJap()
+    {
+        anim.SetTrigger("Jap");
+    }
+
+    public void PlayAnimHook()
+    {
+        anim.SetTrigger("Hook");
+    }
+    public void PlayAnimUpper()
+    {
+        anim.SetTrigger("Upper");
+    }
+
+    public void SetWinTrigger()
+    {
+        anim.SetTrigger("Win");
     }
 
     public void DelayAnim()
     {
-        anim.SetTrigger("Hit");
-        
+        int randNum = (int)Random.Range(1,4);
+        Debug.Log(randNum);
+        switch((int)Random.Range(1,4))
+        {
+        case 1:
+            anim.SetTrigger("Hit1");
+            break;
+        case 2:
+            anim.SetTrigger("Hit2");
+            break;
+        case 3:
+            anim.SetTrigger("Hit3");
+            break;
+
+        }
     }
 
 }

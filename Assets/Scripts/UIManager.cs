@@ -11,8 +11,11 @@ public class UIManager : MonoBehaviour
         instance = this;
     }
     [Header("Player")]
+
     public Slider p1HpBar;
+    public Text p1HpText;
     public Slider p2HpBar;
+    public Text p2HpText;
 
     [Header("Command")]
     public Text p1CmdText;
@@ -24,4 +27,10 @@ public class UIManager : MonoBehaviour
     [Header("Round")]
     public GameObject roundUI;
     public Text roundText;
+
+    private void Start() 
+    {
+        p2HpBar.maxValue = p1HpBar.maxValue = Player.playerMaxHp;
+        p2HpBar.value = p1HpBar.value = Player.playerMaxHp;
+    }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
                 //TODO :: 플레이어 죽었을 때 
                 break;
             }
-
+            yield return StartCoroutine("RoundStartRoutine");
             yield return StartCoroutine("InputRoutine");
             yield return new WaitForSeconds(2f);
             yield return StartCoroutine(BattleManager.instance.StartBattle());
@@ -57,14 +58,9 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator RoundStartRoutine()
     {
-        GameObject ui = UIManager.instance.roundUI;
-        ui.GetComponentInChildren<Text>().text = $"ROUND {curRound}";
-        UIManager.instance.roundText.text = $"ROUND {curRound}";
-        ui.gameObject.SetActive(true);
-
-        yield return new WaitForSeconds(startTime);
-
-        ui.gameObject.SetActive(false);
+        //round ui active
+        yield return new WaitForSeconds(1f);
+        // round ui deactive
     }
 
 
@@ -89,6 +85,15 @@ public class GameManager : MonoBehaviour
         CommandManager.instance.RandomCommand();
         print("인풋 종료");
         yield return null;
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("MainScene");
+    }
+    public void ReturnTitle()
+    {
+        SceneManager.LoadScene("TitleScene");
     }
 
 }

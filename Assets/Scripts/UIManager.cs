@@ -24,4 +24,8 @@ public class UIManager : MonoBehaviour
     [Header("Round")]
     public GameObject roundUI;
     public Text roundText;
+
+    [Header("Result")]
+    public GameObject resultUI;
+    public Text resultText;
 }

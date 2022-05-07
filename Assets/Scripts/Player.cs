@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     public void PlayAnimation(AttackStyle cmd)
     {
         curAttack = cmd;
-        SoundManager.instance.PlayRandomAttackVfx();
+
         switch(curAttack)
         {
             case AttackStyle.JAP:
@@ -50,9 +50,9 @@ public class Player : MonoBehaviour
         if(gameResult != GameResult.WIN)
         {
             if(curAttack == AttackStyle.UPPER)
-                Invoke("DelayAnim",0.3f);
+                Invoke("DelayAnim",0.6f);
             else
-                Invoke("DelayAnim",0.5f);
+                Invoke("DelayAnim",0.4f);
         }
         //if(gameResult == GameResult.LOSE )
         //{
@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
     public void DelayAnim()
     {
         anim.SetTrigger("Hit");
-        
+        SoundManager.instance.PlayRandomAttackVfx();
     }
 
 }

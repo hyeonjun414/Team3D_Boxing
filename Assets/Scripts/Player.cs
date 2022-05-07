@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public static int playerMaxHp = 100;
+    public static int playerMaxHp = 10;
     private int _playerHp = playerMaxHp;
     public Animator anim;
 
@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         anim = GetComponentInChildren<Animator>();
-        //SetCharacter();
+        SetCharacter();
     }
 
 

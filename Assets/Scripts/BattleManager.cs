@@ -101,6 +101,7 @@ public class BattleManager : MonoBehaviour
             if(p1.playerHp == 0 && p2.playerHp == 0)
             {
                 //비겼을때
+                UIManager.instance.resultText.text = "DRAW!!";
                 break;
             }
             else
@@ -111,6 +112,7 @@ public class BattleManager : MonoBehaviour
                     //p2가 이겼을때
                     p2.PlayAnimation(CommandManager.instance.p2Attack[i]);
                     p2.PlayAnimWin();
+                    UIManager.instance.resultText.text = "Player 2 Win!";
                     break;
                 }
                 if (p2.playerHp == 0)
@@ -118,12 +120,14 @@ public class BattleManager : MonoBehaviour
                     //p1이 이겼을때
                     p1.PlayAnimation(CommandManager.instance.p1Attack[i]);
                     p1.PlayAnimWin();
+                    UIManager.instance.resultText.text = "Player 1 Win!";
                     break;
                 }
             }
             p1.PlayAnimation(CommandManager.instance.p1Attack[i]);
             p2.PlayAnimation(CommandManager.instance.p2Attack[i]);
-            yield return new WaitForSeconds(1f);
+
+            yield return new WaitForSeconds(1.5f);
             CameraManager.instance.ActiveCam(CamType.Normal);
             yield return new WaitForSeconds(0.2f);
         }

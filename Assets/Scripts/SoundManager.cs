@@ -15,6 +15,9 @@ public class SoundManager : MonoBehaviour
     [Header("Input Command")]
     public AudioClip inputCmdSound;
 
+    [Header("RingRing")]
+    public AudioClip ringSound;
+
     public AudioSource bgm;
     public AudioSource effect;
 
@@ -26,6 +29,12 @@ public class SoundManager : MonoBehaviour
     public void PlayInputSound()
     {
         effect.PlayOneShot(inputCmdSound);
+    }
+
+    public void PlayRingRing()
+    {
+        effect.PlayOneShot(ringSound);
+
     }
 
 }

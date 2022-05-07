@@ -15,7 +15,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+
         StartCoroutine("Round");
+        
     }
 
     public float commandInputTime;
@@ -23,9 +25,16 @@ public class GameManager : MonoBehaviour
     public Player p2;
 
     public int curRound = 1;
+    public Text countcurRound;
+
     public float startTime = 1f;
     public float cmdTime = 2f;
     public bool isCmdTime;
+
+    public int countdownTime;
+    public Text countdownDisplay;
+
+
 
     public void BattleResult()
     {
@@ -46,6 +55,7 @@ public class GameManager : MonoBehaviour
                 break;
             }
 
+            yield return StartCoroutine("RoundStartRountine");
             yield return StartCoroutine("InputRoutine");
             yield return new WaitForSeconds(2f);
             yield return StartCoroutine(BattleManager.instance.StartBattle());
@@ -54,17 +64,24 @@ public class GameManager : MonoBehaviour
         }
         // TODO :: 플레이어 죽었을 때
         yield return null;
+
     }
+
     IEnumerator RoundStartRoutine()
     {
-        GameObject ui = UIManager.instance.roundUI;
-        ui.GetComponentInChildren<Text>().text = $"ROUND {curRound}";
-        UIManager.instance.roundText.text = $"ROUND {curRound}";
-        ui.gameObject.SetActive(true);
+        while (curRound > 5)
+        {
+            countcurRound.text = countcurRound.ToString();
 
-        yield return new WaitForSeconds(startTime);
+            yield return new WaitForSeconds(1f);
 
-        ui.gameObject.SetActive(false);
+            curRound++;
+
+        }
+        yield return new WaitForSeconds(1f);
+
+        countcurRound.gameObject.SetActive(false);
+        //round ui deacive
     }
 
 
@@ -89,6 +106,28 @@ public class GameManager : MonoBehaviour
         CommandManager.instance.RandomCommand();
         print("인풋 종료");
         yield return null;
+    }
+
+
+    IEnumerator CountdownToStart()
+    {
+        while (countdownTime > 0)
+        {
+            countdownDisplay.text = countdownTime.ToString();
+
+            yield return new WaitForSeconds(1f);
+
+            countdownTime--;
+
+        }
+
+        countdownDisplay.text = "Go!";
+
+        yield return new WaitForSeconds(1f);
+
+
+        countdownDisplay.gameObject.SetActive(false);
+
     }
 
 }

@@ -3807,6 +3807,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3124323f62b461347af0c131b62b35f9, type: 3}
   - {fileID: 8300000, guid: 66343dc37464c2e4c90671dc9a24aa3b, type: 3}
   inputCmdSound: {fileID: 8300000, guid: 595dfd7654e470b43a3171a3518b4a5f, type: 3}
+  ringSound: {fileID: 8300000, guid: 8ac02ceb2b9be8e42a7f5bce9bfaed34, type: 3}
   bgm: {fileID: 1034056853}
   effect: {fileID: 1034056854}
 --- !u!82 &1034056853

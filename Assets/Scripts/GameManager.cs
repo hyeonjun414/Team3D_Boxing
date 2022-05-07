@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Round()
     {
+        yield return new WaitForSeconds(1f);
         while (true)
         {
             if (p1.playerHp <= 0 || p2.playerHp <= 0)
@@ -65,7 +66,9 @@ public class GameManager : MonoBehaviour
         ui.GetComponentInChildren<Text>().text = $"ROUND {curRound}";
         UIManager.instance.roundText.text = $"ROUND {curRound}";
         ui.gameObject.SetActive(true);
+        SoundManager.instance.PlayRingRing();
         yield return new WaitForSeconds(startTime);
+        
         ui.gameObject.SetActive(false);
     }
 
